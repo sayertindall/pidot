@@ -8,7 +8,7 @@ import type {
 	ExtensionAPI,
 	ExtensionCommandContext,
 } from "@earendil-works/pi-coding-agent";
-import { mutateState } from "./state";
+import { mutateState, readStateOrEmpty } from "./state";
 import { updateWidget } from "./widget";
 
 const STATUS_ICON: Record<string, string> = {
@@ -58,7 +58,7 @@ async function showStatus(
 	sid: string,
 	ctx: ExtensionCommandContext,
 ): Promise<void> {
-	const state = await mutateState(sid, (s) => s);
+	const state = readStateOrEmpty(sid);
 
 	const mode = state.enabled ? "on" : "off";
 	const done = state.tasks.filter((t) => t.status === "done").length;
@@ -81,7 +81,7 @@ async function enableTasks(
 	ctx: ExtensionCommandContext,
 ): Promise<void> {
 	const state = await mutateState(sid, (s) => {
-		if (s.enabled) return s;
+		if (s.enabled) return undefined;
 		return { ...s, enabled: true };
 	});
 
@@ -101,7 +101,7 @@ async function disableTasks(
 	ctx: ExtensionCommandContext,
 ): Promise<void> {
 	const state = await mutateState(sid, (s) => {
-		if (!s.enabled) return s;
+		if (!s.enabled) return undefined;
 		return { ...s, enabled: false, tasks: [], nextId: 1 };
 	});
 

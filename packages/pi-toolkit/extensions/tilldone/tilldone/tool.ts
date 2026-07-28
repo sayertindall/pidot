@@ -17,7 +17,7 @@ import type {
 } from "@earendil-works/pi-coding-agent";
 import { isTaskGated, runGate } from "./gates";
 import { TillDoneParams } from "./schemas";
-import { mutateState } from "./state";
+import { mutateState, readStateOrEmpty } from "./state";
 import type { Task, TaskStatus, TillDoneDetails } from "./types";
 import { updateWidget } from "./widget";
 
@@ -153,7 +153,7 @@ async function handleDone(
 	}
 
 	// Read to check for gate.
-	const state = await mutateState(sid, (s) => s);
+	const state = readStateOrEmpty(sid);
 	const task = state.tasks.find((t) => t.id === id);
 	if (!task) {
 		return makeResult("done", state.tasks, state.nextId, `Task #${id} not found`);
@@ -175,7 +175,7 @@ async function handleDone(
 	// Mark done.
 	const updated = await mutateState(sid, (s) => {
 		const t = s.tasks.find((t2) => t2.id === id);
-		if (!t) return s;
+		if (!t) return undefined;
 		t.status = "done";
 		return { ...s, tasks: [...s.tasks] };
 	});
@@ -222,7 +222,7 @@ async function handleNext(sid: string, ctx: ExtensionContext) {
 async function handlePrev(sid: string, ctx: ExtensionContext) {
 	const state = await mutateState(sid, (s) => {
 		const currentIdx = s.tasks.findIndex((t) => t.status === "inprogress");
-		if (currentIdx === -1) return s;
+		if (currentIdx === -1) return undefined;
 
 		// Move current back to idle.
 		const tasks = s.tasks.map((t) => ({ ...t }));
@@ -250,7 +250,7 @@ async function handlePrev(sid: string, ctx: ExtensionContext) {
 }
 
 async function handleList(sid: string, ctx: ExtensionContext) {
-	const state = await mutateState(sid, (s) => s);
+	const state = readStateOrEmpty(sid);
 	updateWidget(ctx, state);
 
 	const text =
@@ -300,7 +300,7 @@ async function handleUpdate(
 
 	const state = await mutateState(sid, (s) => {
 		const t = s.tasks.find((t2) => t2.id === id);
-		if (!t) return s;
+		if (!t) return undefined;
 		oldText = t.text;
 		const tasks = s.tasks.map((t2) => (t2.id === id ? { ...t2 } : t2));
 		const updated = tasks.find((t2) => t2.id === id)!;

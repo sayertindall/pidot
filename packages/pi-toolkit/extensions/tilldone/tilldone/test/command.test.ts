@@ -4,11 +4,12 @@
  * Tests for /tasks command (on, off, status, toggle, invalid usage).
  */
 
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { registerTasksCommand } from '../command';
+import { statePath } from '../state';
 
 let FAKE_HOME = "";
 
@@ -91,6 +92,15 @@ describe("/tasks command", () => {
 				expect.stringContaining("task-mode:on"),
 				"info",
 			);
+		});
+
+		it("does not write to disk (pure read)", async () => {
+			await run("on");
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+			await run("status");
+			expect(statSync(path).mtimeMs).toBe(before);
 		});
 	});
 

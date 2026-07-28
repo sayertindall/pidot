@@ -13,7 +13,7 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { registerTasksCommand } from "./command";
 import { shouldBlockAgentStart } from "./gates";
-import { readStateOrEmpty, mutateState } from "./state";
+import { readStateOrEmpty } from "./state";
 import { registerTillDoneTool } from "./tool";
 import { formatTaskList, updateWidget } from "./widget";
 
@@ -46,7 +46,7 @@ export default function tilldoneExtension(pi: ExtensionAPI): void {
 
 	pi.on("before_agent_start", async () => {
 		if (!sessionId) return undefined;
-		const state = await mutateState(sessionId, (s) => s);
+		const state = readStateOrEmpty(sessionId);
 		if (!state.enabled) return undefined;
 
 		const block = shouldBlockAgentStart(state);
@@ -84,7 +84,7 @@ export default function tilldoneExtension(pi: ExtensionAPI): void {
 		if (!sessionId) return;
 		if (nudgedThisCycle) return;
 
-		const state = await mutateState(sessionId, (s) => s);
+		const state = readStateOrEmpty(sessionId);
 		if (!state.enabled) return;
 
 		const incomplete = state.tasks.filter((t) => t.status !== "done");

@@ -8,6 +8,7 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
+import { withFileMutationQueue } from "@earendil-works/pi-coding-agent";
 import { defaultState } from "./schemas";
 import type { TillDoneState } from "./types";
 
@@ -75,28 +76,22 @@ export function writeStateAtomic(path: string, state: TillDoneState): void {
 
 // -- Mutation queue ---------------------------------------------------------
 
-// Simple serial queue to prevent concurrent writes to the same file.
-const queues = new Map<string, Promise<void>>();
-
 /**
- * Serialise mutations to a given state file. Runs `transform` inside the
- * queue lock; reads current state, applies transform, writes back.
+ * Serialise mutations to a given state file via the runtime's per-file
+ * queue. Reads current state, applies `transform`, and writes back —
+ * unless `transform` returns `undefined`, in which case the file is left
+ * untouched.
+ *
+ * Read-only callers must use `readStateOrEmpty` directly: an identity
+ * transform `(s) => s` returns a non-undefined value and would trigger an
+ * unnecessary write on every call.
  */
 export async function mutateState(
 	sessionId: string,
 	transform: (current: TillDoneState) => TillDoneState | undefined,
 ): Promise<TillDoneState> {
 	const path = statePath(sessionId);
-
-	const existing = queues.get(path) ?? Promise.resolve();
-	let release!: () => void;
-	const next = new Promise<void>((resolve) => {
-		release = resolve;
-	});
-	queues.set(path, existing.then(() => next));
-
-	try {
-		await existing;
+	return withFileMutationQueue(path, async () => {
 		const current = readStateOrEmpty(sessionId);
 		const updated = transform(current);
 		if (updated !== undefined) {
@@ -104,9 +99,7 @@ export async function mutateState(
 			return updated;
 		}
 		return current;
-	} finally {
-		release();
-	}
+	});
 }
 
 // -- Helpers ----------------------------------------------------------------

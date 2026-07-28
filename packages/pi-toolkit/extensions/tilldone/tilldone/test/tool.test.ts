@@ -6,11 +6,12 @@
  * the registerTillDoneTool callback.
  */
 
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { registerTillDoneTool } from '../tool';
+import { statePath } from '../state';
 import type { TillDoneState } from '../types';
 
 let FAKE_HOME = "";
@@ -154,6 +155,15 @@ describe("tilldone tool", () => {
 			expect(tasks.find((t: any) => t.id === 2)!.status).toBe("idle");
 			expect(tasks.find((t: any) => t.id === 1)!.status).toBe("inprogress");
 		});
+
+		it("does not write when no task is inprogress", async () => {
+			await exec("add", { texts: ["A", "B"] });
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+			await exec("prev");
+			expect(statSync(path).mtimeMs).toBe(before);
+		});
 	});
 
 	describe("list", () => {
@@ -167,6 +177,15 @@ describe("tilldone tool", () => {
 		it("shows empty message when no tasks", async () => {
 			const result = await exec("list");
 			expect(result.content[0]!.text).toContain("No tasks defined");
+		});
+
+		it("does not write to disk (pure read)", async () => {
+			await exec("add", { texts: ["A", "B"] });
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+			await exec("list");
+			expect(statSync(path).mtimeMs).toBe(before);
 		});
 	});
 
@@ -212,6 +231,15 @@ describe("tilldone tool", () => {
 			await exec("add", { text: "A" });
 			const result = await exec("update", { id: 1 });
 			expect(result.details.error).toContain("at least one of");
+		});
+
+		it("does not write when task id not found", async () => {
+			await exec("add", { texts: ["A"] });
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+			await exec("update", { id: 999, text: "nope" });
+			expect(statSync(path).mtimeMs).toBe(before);
 		});
 	});
 });

@@ -5,11 +5,12 @@
  * Drives the full lifecycle: register, session_start, commands, tool usage.
  */
 
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import tilldoneExtension from '../index';
+import { statePath } from '../state';
 
 let FAKE_HOME = "";
 
@@ -177,6 +178,21 @@ describe("tilldone extension factory", () => {
 			expect(result.message.content).toContain("#1");
 			expect(result.message.content).toContain("Write tests");
 		});
+
+		it("does not write to disk (pure read)", async () => {
+			const sessionStart = findHandler("session_start")!;
+			await sessionStart({}, fakeCtx);
+			await capturedCommand!.handler("on", fakeCtx);
+			await capturedTool!.execute("c1", { action: "add", text: "A" }, undefined, undefined, fakeCtx);
+			await capturedTool!.execute("c2", { action: "update", id: 1, status: "inprogress" }, undefined, undefined, fakeCtx);
+
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+
+			await findHandler("before_agent_start")!();
+			expect(statSync(path).mtimeMs).toBe(before);
+		});
 	});
 
 	describe("agent_end nudge", () => {
@@ -212,6 +228,20 @@ describe("tilldone extension factory", () => {
 			const handler = findHandler("agent_end")!;
 			await handler({}, fakeCtx);
 			expect(pi.sendMessage).not.toHaveBeenCalled();
+		});
+
+		it("does not write to disk (pure read)", async () => {
+			const sessionStart = findHandler("session_start")!;
+			await sessionStart({}, fakeCtx);
+			await capturedCommand!.handler("on", fakeCtx);
+			await capturedTool!.execute("c1", { action: "add", texts: ["A"] }, undefined, undefined, fakeCtx);
+
+			const path = statePath(sessionId);
+			const before = statSync(path).mtimeMs;
+			await new Promise((resolve) => setTimeout(resolve, 15));
+
+			await findHandler("agent_end")!({}, fakeCtx);
+			expect(statSync(path).mtimeMs).toBe(before);
 		});
 
 		it("only nudges once per cycle", async () => {
