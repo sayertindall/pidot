@@ -3,7 +3,15 @@
   "private": true,
   "type": "module",
   "pi": {
-    "extensions": ["./packages/extensions"]
+    "extensions": ["./packages/extensions"],
+    "skills": [
+      "./packages/pi-config/skills",
+      "./packages/pi-memory/skills",
+      "./packages/pi-subagents/skills",
+      "./packages/pi-process/extensions/pi-dispatch/skills",
+      "./packages/pi-process/extensions/pi-herdr/skills",
+      "./packages/pi-toolkit/extensions/session-control/skills"
+    ]
   },
   "exports": {
     ".": "./packages/extensions/index.ts"
