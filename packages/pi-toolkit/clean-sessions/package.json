@@ -1,0 +1,59 @@
+{
+  "name": "pi-toolkit-clean-sessions",
+  "version": "0.1.0",
+  "description": "Prune old, low-value Pi session files safely with trash-and-confirm workflow",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi",
+    "pi-agent",
+    "pi-package",
+    "extension",
+    "clean-sessions",
+    "cleanup",
+    "pi-extension"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "files": [
+    "extensions/**/*.ts",
+    "!extensions/**/test/**",
+    "README.md",
+    "SPEC.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check",
+    "format": "biome check --write"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.81.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.8",
+    "@biomejs/biome": "^2.5.0"
+  },
+  "exports": {
+    ".": "./extensions/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echohub-ai/pi-extensions"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  }
+}

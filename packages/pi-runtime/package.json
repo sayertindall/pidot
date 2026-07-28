@@ -1,0 +1,55 @@
+{
+  "name": "pi-runtime",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Runtime extensions for pi: long-running goals, no-trace mode, quit-and-delete session, and worktree isolation.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "runtime",
+    "goal",
+    "worktree",
+    "session-lifecycle",
+    "pi"
+  ],
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.8",
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "exports": {
+    ".": "./extensions/index.ts"
+  },
+  "files": [
+    "extensions/**/*.ts",
+    "!extensions/**/test/**",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echohub-ai/pi-extensions"
+  }
+}

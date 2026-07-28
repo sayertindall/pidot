@@ -1,0 +1,79 @@
+{
+  "name": "@ogulcancelik/pi-herdr",
+  "version": "0.4.0",
+  "description": "Pi-native tools for controlling Herdr layouts, panes, and coding agents.",
+  "type": "module",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "herdr",
+    "pane-management",
+    "agent-workflows",
+    "dev-server",
+    "watch",
+    "coding-agent",
+    "pi"
+  ],
+  "author": "Can Celik",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echohub-ai/pi-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/ogulcancelik/pi-extensions/issues"
+  },
+  "homepage": "https://github.com/ogulcancelik/pi-extensions/tree/main/packages/pi-herdr#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "lint": "biome check",
+    "format": "biome check --write",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.8",
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "exports": {
+    ".": "./extensions/index.ts"
+  },
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "files": [
+    "extensions/**/*.ts",
+    "!extensions/**/test/**",
+    "README.md",
+    "LICENSE"
+  ]
+}

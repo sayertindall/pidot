@@ -1,0 +1,46 @@
+{
+  "name": "pi-webtools",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "check": "npm run typecheck && npm run test",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["pi-package", "pi-extension", "web", "search", "fetch"],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "dependencies": {
+    "html-to-text": "^9.0.5",
+    "linkedom": "^0.18.12",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": { "optional": true },
+    "@earendil-works/pi-coding-agent": { "optional": true },
+    "@earendil-works/pi-tui": { "optional": true },
+    "typebox": { "optional": true }
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "0.81.1",
+    "@earendil-works/pi-coding-agent": "0.81.1",
+    "@earendil-works/pi-tui": "0.81.1",
+    "@types/node": "^24.5.2",
+    "@types/turndown": "^5.0.5",
+    "typebox": "*",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "catalog:"
+  }
+}

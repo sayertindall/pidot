@@ -1,0 +1,25 @@
+{
+  "code": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-20250514",
+    "thinkingLevel": "low",
+    "tools": ["read", "bash", "edit", "write", "grep", "find", "ls"],
+    "instructions": "Default coding mode. Full power. Be concise."
+  },
+  "review": {
+    "tools": ["read", "bash", "grep", "find", "ls"],
+    "thinkingLevel": "medium",
+    "instructions": "Review mode. Read-only. P0-P3 findings."
+  },
+  "ask": {
+    "provider": "anthropic",
+    "model": "claude-haiku-3.5",
+    "thinkingLevel": "off",
+    "tools": ["read", "bash", "grep", "find", "ls"],
+    "instructions": "Quick Q&A. Cheap model. No edits."
+  },
+  "debug": {
+    "thinkingLevel": "high",
+    "instructions": "Evidence-first. Reproduce, narrow, falsify."
+  }
+}

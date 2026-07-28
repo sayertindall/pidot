@@ -1,0 +1,61 @@
+{
+  "name": "pi-runtime-worktree",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Relocate the active pi session to another git working tree while preserving conversation history.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "git",
+    "worktree",
+    "session-relocation",
+    "pi"
+  ],
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "files": [
+    "extensions/**/*.ts",
+    "!extensions/**/test/**",
+    "README.md",
+    "SPEC.md"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.8",
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "format": "biome check --write"
+  },
+  "exports": {
+    ".": "./extensions/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echohub-ai/pi-extensions"
+  }
+}

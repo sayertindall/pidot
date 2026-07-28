@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# libs (reference repos, not deployed)
+libs/**/*
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# pi runtime (never commit)
+*.db
+*.db-shm
+*.db-wal
+sessions/
+auth.json
+
+# Build artifacts
+dist/
+*.js
+!install.sh
+.pi-subagents
+node_modules/
+bun.lock
+node_modules
+packages/pi-config/node_modules
+packages/pi-config/package-lock.json
+libs/
+
+# Package manager
+pnpm-lock.yaml
+!packages/*/pnpm-lock.yaml
+.docs/
+/.pnpm-store
+/.pi
+.changeset/

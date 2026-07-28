@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "bash": {
+    "blockPatterns": [
+      { "pattern": "rm -rf", "reason": "Recursive force delete" },
+      { "pattern": "sudo rm", "reason": "Elevated delete" }
+    ]
+  },
+  "paths": {
+    "readOnly": ["*.lock", "dist/", "build/"],
+    "noDelete": [".git/", "LICENSE"]
+  },
+  "credentials": {
+    "blockPatterns": ["-----BEGIN.*PRIVATE KEY-----", "sk-ant-", "ghp_"],
+    "blockFiles": [".env", "*.pem", "*.key"]
+  }
+}

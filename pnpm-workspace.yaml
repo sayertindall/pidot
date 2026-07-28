@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - packages/*/*
+allowBuilds:
+  '@google/genai': false
+  esbuild: set this to true or false
+  protobufjs: false
+catalog:
+  vitest: ^4.1.8

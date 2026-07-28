@@ -1,0 +1,13 @@
+{
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-sonnet-4-20250514",
+  "defaultThinkingLevel": "low",
+  "theme": "vesper-dark",
+  "packages": [
+    "npm:pi-toolkit",
+    "npm:pi-code-intel",
+    "npm:pi-subagents",
+    "npm:pi-runtime",
+    "npm:pi-misc"
+  ]
+}

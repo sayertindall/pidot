@@ -1,0 +1,75 @@
+{
+	"name": "pi-config",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "Core pi configuration: modes, safety, review, statusline",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"pi"
+	],
+	"license": "MIT",
+	"pi": {
+		"extensions": [
+			"./extensions"
+		],
+		"skills": [
+			"./skills"
+		],
+		"prompts": [
+			"./prompts"
+		],
+		"themes": [
+			"./themes"
+		]
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-agent-core": "*",
+		"@earendil-works/pi-ai": "*",
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*",
+		"typebox": "*"
+	},
+	"peerDependenciesMeta": {
+		"@earendil-works/pi-agent-core": {
+			"optional": true
+		},
+		"@earendil-works/pi-ai": {
+			"optional": true
+		},
+		"@earendil-works/pi-coding-agent": {
+			"optional": true
+		},
+		"@earendil-works/pi-tui": {
+			"optional": true
+		},
+		"typebox": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@types/bun": "^1.1.14",
+		"typescript": "^5.7.0",
+		"vitest": "^4.1.8",
+		"@biomejs/biome": "^2.5.0",
+		"@types/node": "^22.0.0"
+	},
+	"exports": {
+		".": "./extensions/index.ts"
+	},
+	"files": [
+		"extensions/**/*.ts",
+		"!extensions/**/test/**",
+		"README.md"
+	],
+	"scripts": {
+		"lint": "biome check",
+		"format": "biome check --write",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/echohub-ai/pi-extensions"
+	}
+}

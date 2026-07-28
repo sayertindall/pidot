@@ -1,0 +1,65 @@
+{
+  "name": "pi-process",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Process management extensions for pi: PTY dispatch engine, Herdr integration, SSH remote execution, and tmux control.",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pty",
+    "terminal",
+    "dispatch",
+    "ssh",
+    "tmux",
+    "herdr",
+    "pi"
+  ],
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-agent-core": "*",
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-agent-core": {
+      "optional": true
+    },
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.8",
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "exports": {
+    ".": "./extensions/index.ts"
+  },
+  "files": [
+    "extensions/**/*.ts",
+    "!extensions/**/test/**",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echohub-ai/pi-extensions"
+  }
+}
