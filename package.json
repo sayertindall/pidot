@@ -11,8 +11,7 @@
       "./packages/pi-runtime/extensions",
       "./packages/pi-subagents/extensions",
       "./packages/pi-toolkit/extensions",
-      "./packages/pi-webtools/extensions",
-      "./packages/pi-zentui/extensions"
+      "./packages/pi-webtools/extensions"
     ],
     "skills": [
       "./packages/pi-config/skills",
