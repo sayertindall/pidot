@@ -33,6 +33,17 @@
     "lint": "pnpm -r lint",
     "format": "pnpm -r format"
   },
+  "dependencies": {
+    "@xterm/addon-serialize": "^0.13.0",
+    "@xterm/headless": "^5.5.0",
+    "croner": "^9.0.0",
+    "html-to-text": "^9.0.5",
+    "linkedom": "^0.18.12",
+    "nanoid": "^5.0.0",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2",
+    "zigpty": "^0.1.6"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.5.0",
     "typescript": "^5.9.3"
