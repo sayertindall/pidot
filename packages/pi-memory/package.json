@@ -1,6 +1,6 @@
 {
   "name": "pi-memory",
-  "version": "3.0.3",
+  "version": "0.1.0",
   "description": "Memory extension for pi — cache-friendly tiered compaction with observations and reflections.",
   "type": "module",
   "license": "MIT",
