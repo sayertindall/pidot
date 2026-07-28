@@ -31,8 +31,6 @@ packages/pi-config/package-lock.json
 libs/
 
 # Package manager
-pnpm-lock.yaml
-!packages/*/pnpm-lock.yaml
 .docs/
 /.pnpm-store
 /.pi
