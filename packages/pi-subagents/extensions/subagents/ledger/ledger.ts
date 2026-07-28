@@ -160,7 +160,7 @@ export async function reconcilePersistedChildren(
 
 	// Dynamic import to avoid hard dependency on session-control
 	const { getSocketPath, isSocketAlive: isAlive } = await import(
-		"../../../../pi-toolkit/session-control/extensions/session-control/registry"
+		"../../../../pi-toolkit/extensions/session-control/session-control/registry"
 	);
 
 	for (const [runId, entry] of entries) {

@@ -9,8 +9,8 @@
  */
 
 import { setTimeout as sleep } from "node:timers/promises";
-import { getSocketPath, isSocketAlive } from "../../../../pi-toolkit/session-control/extensions/session-control/registry";
-import type { SubagentResult } from "../../../../pi-toolkit/session-control/extensions/session-control/types";
+import { getSocketPath, isSocketAlive } from "../../../../pi-toolkit/extensions/session-control/session-control/registry";
+import type { SubagentResult } from "../../../../pi-toolkit/extensions/session-control/session-control/types";
 import type { HarnessResult, PiRpcLaunchConfig } from "../types";
 import { generateRunId } from "./run-id";
 
@@ -87,7 +87,7 @@ export async function fullSpawnAndCollect(
 
 	// 5. Send task over socket and wait for result_ready
 	const { sendRpcCommand } = await import(
-		"../../../../pi-toolkit/session-control/extensions/session-control/client"
+		"../../../../pi-toolkit/extensions/session-control/session-control/client"
 	);
 
 	const command = {

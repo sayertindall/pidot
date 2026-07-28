@@ -2,6 +2,12 @@
   "name": "pi-extensions",
   "private": true,
   "type": "module",
+  "pi": {
+    "extensions": ["./packages/extensions"]
+  },
+  "exports": {
+    ".": "./packages/extensions/index.ts"
+  },
   "scripts": {
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",

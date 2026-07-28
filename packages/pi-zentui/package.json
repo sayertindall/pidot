@@ -10,7 +10,7 @@
   },
   "keywords": ["pi-package", "pi-extension", "zentui", "tui", "theme"],
   "pi": {
-    "extensions": ["."]
+    "extensions": ["./extensions"]
   },
   "peerDependencies": {
     "@earendil-works/pi-ai": "*",

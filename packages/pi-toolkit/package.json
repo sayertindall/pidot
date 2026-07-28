@@ -2,6 +2,12 @@
   "name": "pi-toolkit",
   "version": "0.1.0",
   "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "biome check",
+    "format": "biome check --write"
+  },
   "description": "Toolkit extensions for pi: clean sessions, coach, find session, loop, Q&A, and tilldone.",
   "keywords": [
     "pi-package",
@@ -14,6 +20,9 @@
   "pi": {
     "extensions": [
       "./extensions"
+    ],
+    "skills": [
+      "./extensions/session-control/skills"
     ]
   },
   "peerDependencies": {

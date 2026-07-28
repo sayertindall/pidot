@@ -8,10 +8,10 @@
  *   - worktree       — Git worktree isolation for each session
  */
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import goalExtensions from "../goal/extensions/index";
-import notraceExtensions from "../notrace/extensions/index";
-import quitAndDeleteExtensions from "../quit-and-delete/extensions/index";
-import worktreeExtensions from "../worktree/extensions/index";
+import goalExtensions from "./goal/index.js";
+import notraceExtensions from "./notrace/index.js";
+import quitAndDeleteExtensions from "./quit-and-delete/index.js";
+import worktreeExtensions from "./worktree/index.js";
 
 export default function piRuntimeExtensions(pi: ExtensionAPI): void {
 	goalExtensions(pi);

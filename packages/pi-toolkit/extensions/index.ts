@@ -11,13 +11,13 @@
  *   - tilldone         — Keep running until the task is actually done
  */
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import cleanSessionsExtensions from "../clean-sessions/extensions/index";
-import coachExtensions from "../coach/extensions/index";
-import findSessionExtensions from "../find-session/extensions/index";
-import loopExtensions from "../loop/extensions/index";
-import qnaExtensions from "../qna/extensions/index";
-import sessionControlExtensions from "../session-control/extensions/index";
-import tilldoneExtensions from "../tilldone/extensions/index";
+import cleanSessionsExtensions from "./clean-sessions/index.js";
+import coachExtensions from "./coach/index.js";
+import findSessionExtensions from "./find-session/index.js";
+import loopExtensions from "./loop/index.js";
+import qnaExtensions from "./qna/index.js";
+import sessionControlExtensions from "./session-control/index.js";
+import tilldoneExtensions from "./tilldone/index.js";
 
 export default function piToolkitExtensions(pi: ExtensionAPI): void {
 	cleanSessionsExtensions(pi);
