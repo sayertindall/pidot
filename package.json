@@ -3,7 +3,17 @@
   "private": true,
   "type": "module",
   "pi": {
-    "extensions": ["./packages/extensions"],
+    "extensions": [
+      "./packages/extensions",
+      "./packages/pi-config/extensions",
+      "./packages/pi-memory/extensions",
+      "./packages/pi-process/extensions",
+      "./packages/pi-runtime/extensions",
+      "./packages/pi-subagents/extensions",
+      "./packages/pi-toolkit/extensions",
+      "./packages/pi-webtools/extensions",
+      "./packages/pi-zentui/extensions"
+    ],
     "skills": [
       "./packages/pi-config/skills",
       "./packages/pi-memory/skills",
