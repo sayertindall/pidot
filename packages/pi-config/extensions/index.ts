@@ -13,6 +13,7 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import context7 from "./context7/index";
 import enhance from "./enhance/index";
+import minimalFooter from "./minimal-footer/index";
 import preset from "./preset/index";
 import review from "./review/index";
 import safety from "./safety/index";
@@ -25,4 +26,5 @@ export default function piConfigExtensions(pi: ExtensionAPI): void {
 	status(pi);
 	context7(pi);
 	enhance(pi);
+	minimalFooter(pi);
 }
