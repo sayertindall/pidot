@@ -5,7 +5,6 @@
   "type": "module",
   "pi": {
     "extensions": [
-      "./packages/extensions",
       "./packages/pi-config/extensions",
       "./packages/pi-memory/extensions",
       "./packages/pi-process/extensions",
