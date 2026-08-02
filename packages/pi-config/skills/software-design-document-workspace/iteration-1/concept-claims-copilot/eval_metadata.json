@@ -1,0 +1,17 @@
+{
+  "eval_id": 2,
+  "eval_name": "concept-claims-copilot",
+  "prompt": "Insurance company debating an internal 'claims copilot' that drafts claim responses for adjusters using an LLM. Concept/design doc framing the problem, what we know and don't, and how to decide whether to build it. Context: 120 adjusters, 25 claims/day each, a claims DB, strong compliance skepticism.",
+  "assertions": [
+    "Document opens with metadata and a one-sentence objective",
+    "Problem statement separates observed evidence from interpretation, or explicitly labels unverified claims as assumptions",
+    "States a quotable core insight or concept statement (what makes this worth building), not just a feature list",
+    "Lists risky assumptions and attaches a concrete cheapest falsification experiment to each",
+    "Addresses the do-nothing alternative with an honest cost assessment",
+    "Directly addresses compliance concerns (given in the prompt) rather than ignoring them",
+    "Ends in a path-to-conviction / experiment sequence with decision points, not an implementation build plan",
+    "Has explicit non-goals",
+    "Does not fabricate metrics beyond those in the prompt (any derived numbers trace to the prompt's 120 adjusters / 25 claims figures or are labeled assumptions)",
+    "Contains at least one named-person usage scenario"
+  ]
+}
