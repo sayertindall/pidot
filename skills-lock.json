@@ -42,6 +42,18 @@
       "sourceType": "github",
       "skillPath": "skills/better-writing/SKILL.md",
       "computedHash": "ea8e80fe5c72ff3b8c04956dc6c92fa86723f83c9d90674db9edba1cc621d344"
+    },
+    "ux-flow-plan": {
+      "source": "jnsahaj/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ux-flow-plan/SKILL.md",
+      "computedHash": "b0a2e49cb08061b008591c2725eb353724623c7cf2c0135e3ad23b1f1c9cc3df"
+    },
+    "zero-tech-debt": {
+      "source": "jnsahaj/skills",
+      "sourceType": "github",
+      "skillPath": "skills/zero-tech-debt/SKILL.md",
+      "computedHash": "59567dcf7aa66db3b7d32e943b495e20161ba06f6aa084e7a4c126ee044667d5"
     }
   }
 }
