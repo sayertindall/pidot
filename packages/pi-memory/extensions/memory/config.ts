@@ -50,7 +50,7 @@ export const DEFAULTS: Config = {
 	reflectAfterTokens: 20_000,
 	compactAfterTokens: 81_000,
 	compactAfterTokensMode: "ratio",
-	compactAfterTokensRatio: 0.68,
+	compactAfterTokensRatio: 0.85,
 	observationsPoolMaxTokens: 20_000,
 	observationsPoolTargetTokens: 10_000,
 	agentMaxTurns: 16,
@@ -67,13 +67,13 @@ export const COMPACT_AFTER_TOKENS_MODE_VALUES: readonly CompactAfterTokensMode[]
  *
  * In `"calibrated"` mode this is always `config.compactAfterTokens`.
  *
- * In `"ratio"` mode this is `floor(contextWindow * compactAfterTokensRatio)`
- * (clamped to a minimum of 1) when `contextWindow` is a positive number, and
- * falls back to `config.compactAfterTokens` otherwise.
+ * In `"ratio"` mode this is the larger of `compactAfterTokens` and
+ * `floor(contextWindow * compactAfterTokensRatio)` when `contextWindow` is a
+ * positive number, and falls back to `config.compactAfterTokens` otherwise.
  */
 export function resolveCompactAfterTokens(config: Config, contextWindow: number | undefined): number {
 	if (config.compactAfterTokensMode === "ratio" && typeof contextWindow === "number" && contextWindow > 0) {
-		return Math.max(1, Math.floor(contextWindow * config.compactAfterTokensRatio));
+		return Math.max(config.compactAfterTokens, Math.floor(contextWindow * config.compactAfterTokensRatio));
 	}
 	return config.compactAfterTokens;
 }

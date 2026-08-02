@@ -34,6 +34,7 @@ type ConsolidationCtx = {
 	hasUI: boolean;
 	ui?: { notify: (message: string, type?: "warning" | "info" | "error") => void };
 	model: unknown;
+	modelRegistry?: { find: (provider: string, modelId: string) => unknown };
 	sessionManager: {
 		getBranch: () => unknown;
 		getSessionId?: () => string;
@@ -82,6 +83,7 @@ function makeModelResolver(runtime: Runtime, ctx: ConsolidationCtx): (stage: "ob
 	return async (stage) => {
 		cached ??= await runtime.resolveModel({
 			model: ctx.model,
+			modelRegistry: ctx.modelRegistry,
 			hasUI: ctx.hasUI,
 			ui: ctx.ui,
 		});

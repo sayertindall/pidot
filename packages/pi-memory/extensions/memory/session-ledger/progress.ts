@@ -122,6 +122,56 @@ export function findLastCompactionIndex(entries: Entry[]): number {
 	return -1;
 }
 
+function asNumber(value: unknown): number | undefined {
+	return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
+function usageTokensFromMessage(message: unknown): number | undefined {
+	if (!message || typeof message !== "object") return undefined;
+	const usage = (message as { usage?: unknown }).usage;
+	if (!usage || typeof usage !== "object") return undefined;
+
+	const asObject = usage as {
+		totalTokens?: unknown;
+		total_tokens?: unknown;
+		tokens?: unknown;
+		input?: unknown;
+		output?: unknown;
+	};
+	const totalTokens = asNumber(asObject.totalTokens);
+	if (totalTokens !== undefined) return totalTokens;
+	const totalTokensSnake = asNumber(asObject.total_tokens);
+	if (totalTokensSnake !== undefined) return totalTokensSnake;
+	const tokenField = asNumber(asObject.tokens);
+	if (tokenField !== undefined) return tokenField;
+
+	const inputTokens = asNumber(asObject.input) ?? 0;
+	const outputTokens = asNumber(asObject.output) ?? 0;
+	if (inputTokens + outputTokens > 0) return inputTokens + outputTokens;
+	return undefined;
+}
+
+function currentAssistantUsageTokens(entries: Entry[]): number | undefined {
+	for (let i = entries.length - 1; i >= 0; i--) {
+		const entry = entries[i];
+		if (!entry || entry.type !== "message") continue;
+		const message = entry.message;
+		if (!message || typeof message !== "object") continue;
+		if ((message as { role?: unknown }).role !== "assistant") continue;
+		const usageTokens = usageTokensFromMessage(message);
+		if (usageTokens !== undefined) return usageTokens;
+	}
+	return undefined;
+}
+
+/**
+ * Prefer actual assistant-context usage if available; fallback to estimated raw
+ * source tokens when usage is not present.
+ */
+export function compactationTokenPressure(entries: Entry[]): number | undefined {
+	return currentAssistantUsageTokens(entries) ?? rawTokensSinceLastCompaction(entries);
+}
+
 export function rawTokensSinceLastCompaction(entries: Entry[]): number {
 	const compactionIndex = findLastCompactionIndex(entries);
 	if (compactionIndex === -1) return rawTokensAfterIndex(entries, -1);
