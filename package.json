@@ -11,7 +11,7 @@
       "./packages/pi-runtime/extensions",
       "./packages/pi-subagents/extensions",
       "./packages/pi-toolkit/extensions",
-      "./packages/pi-webtools/extensions"
+      "./packages/pi-pdf/extensions"
     ],
     "skills": [
       "./packages/pi-config/skills",
@@ -19,7 +19,8 @@
       "./packages/pi-subagents/skills",
       "./packages/pi-process/extensions/pi-dispatch/skills",
       "./packages/pi-process/extensions/pi-herdr/skills",
-      "./packages/pi-toolkit/extensions/session-control/skills"
+      "./packages/pi-toolkit/extensions/session-control/skills",
+      "./packages/pi-pdf/skills"
     ]
   },
   "exports": {
