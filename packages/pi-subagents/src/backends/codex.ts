@@ -9,7 +9,7 @@
  * never leave the manager stuck in "running".
  */
 
-import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { Cause, Scope } from "effect";
