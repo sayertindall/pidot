@@ -5,18 +5,18 @@
   "type": "module",
   "pi": {
     "extensions": [
+      "./packages/pi-background-terminals",
       "./packages/pi-config/extensions",
       "./packages/pi-memory/extensions",
       "./packages/pi-process/extensions",
       "./packages/pi-runtime/extensions",
-      "./packages/pi-subagents/extensions",
+      "./packages/pi-subagents",
       "./packages/pi-toolkit/extensions",
       "./packages/pi-pdf/extensions"
     ],
     "skills": [
       "./packages/pi-config/skills",
       "./packages/pi-memory/skills",
-      "./packages/pi-subagents/skills",
       "./packages/pi-process/extensions/pi-dispatch/skills",
       "./packages/pi-process/extensions/pi-herdr/skills",
       "./packages/pi-toolkit/extensions/session-control/skills",
