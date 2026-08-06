@@ -17,6 +17,7 @@ import minimalFooter from "./minimal-footer/index";
 import preset from "./preset/index";
 import review from "./review/index";
 import safety from "./safety/index";
+import see from "./see/index";
 import status from "./status/index";
 
 export default function piConfigExtensions(pi: ExtensionAPI): void {
@@ -27,4 +28,5 @@ export default function piConfigExtensions(pi: ExtensionAPI): void {
 	context7(pi);
 	enhance(pi);
 	minimalFooter(pi);
+	see(pi);
 }

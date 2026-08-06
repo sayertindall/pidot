@@ -12,6 +12,7 @@ store under `~/.pi/agent/pi-config/`.
 | Enhance | Prompt rewriting engine with presets | [pi-config-enhance.md](pi-config-enhance.md) |
 | Preset | System prompt preset management | [pi-config-preset.md](pi-config-preset.md) |
 | Context7 | Library documentation search | [pi-config-context7.md](pi-config-context7.md) |
+| See | Vision delegation via Codex CLI | [pi-config-see.md](pi-config-see.md) |
 | Status | Status line display (model, tokens, branch) | [pi-config-status.md](pi-config-status.md) |
 
 ## Features
@@ -58,6 +59,10 @@ pi-config/extensions/
 │   ├── index.ts          # /context7 command, search_lib + lookup_lib tools
 │   ├── runtime.ts        # HTTP client for context7 API
 │   └── types.ts
+├── see/                  # Vision delegation via Codex CLI
+│   ├── index.ts          # see tool (image description)
+│   ├── runtime.ts        # describeImage() — spawns codex exec
+│   └── schemas.ts        # TypeBox schema for see params
 └── status/               # Status line + /status command
     ├── index.ts          # Widget hook on session_start/session_shutdown
     ├── runtime.ts        # Token counting, provider/model/thinking extraction
@@ -72,6 +77,7 @@ pi-config/extensions/
 | `enhance_prompt` | enhance | Rewrite a prompt using the active preset |
 | `search_lib` | context7 | Search library documentation |
 | `lookup_lib` | context7 | Get docs for a specific library ID |
+| `see` | see | Describe an image via Codex CLI vision model |
 | `get_goal` | (in pi-runtime) | Get current goal state |
 
 ## Commands
