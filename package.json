@@ -15,6 +15,7 @@
       "./packages/pi-pdf/extensions"
     ],
     "skills": [
+      "./skills",
       "./packages/pi-config/skills",
       "./packages/pi-memory/skills",
       "./packages/pi-process/extensions/pi-dispatch/skills",
