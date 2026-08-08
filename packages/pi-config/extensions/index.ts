@@ -27,5 +27,4 @@ export default function piConfigExtensions(pi: ExtensionAPI): void {
   context7(pi);
   enhance(pi);
   minimalFooter(pi);
-  see(pi);
 }
