@@ -17,16 +17,15 @@ import minimalFooter from "./minimal-footer/index";
 import preset from "./preset/index";
 import review from "./review/index";
 import safety from "./safety/index";
-import see from "./see/index";
 import status from "./status/index";
 
 export default function piConfigExtensions(pi: ExtensionAPI): void {
-	preset(pi);
-	safety(pi);
-	review(pi);
-	status(pi);
-	context7(pi);
-	enhance(pi);
-	minimalFooter(pi);
-	see(pi);
+  preset(pi);
+  safety(pi);
+  review(pi);
+  status(pi);
+  context7(pi);
+  enhance(pi);
+  minimalFooter(pi);
+  see(pi);
 }
